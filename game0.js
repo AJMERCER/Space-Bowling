@@ -391,27 +391,27 @@
 
 	for(i=0;i<5;i++){
 		var ball = createBall();
-		ball.position.set(2*i,3,50);
+		ball.position.set(-4+(2*i),3,50);
 		scene.add(ball);
 }
 for (j=0;j<4;j++){
 	var ball = createBall();
-	ball.position.set((2*j + 1),3,46);
+	ball.position.set(-4+(2*j + 1),3,46);
 	scene.add(ball);
 }
 for (k = 0; k <3; k++){
 	var ball = createBall();
-	ball.position.set((2*k + 2),3,42);
+	ball.position.set(-4+(2*k + 2),3,42);
 	scene.add(ball);
 }
 for(k = 0; k <2; k++){
 	var ball = createBall();
-	ball.position.set((2*k + 3),3,38);
+	ball.position.set(-4+(2*k + 3),3,38);
 	scene.add(ball);
 }
 for(k = 0; k <1; k++){
 	var ball = createBall();
-	ball.position.set((2*k + 4),3,34);
+	ball.position.set(-4+(2*k + 4),3,34);
 	scene.add(ball);
 }
 	}
