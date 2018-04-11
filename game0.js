@@ -50,7 +50,6 @@ var suzanne;
 		endCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		endCamera.position.set(0,50,1);
 		endCamera.lookAt(0,0,0);
-
 	}
 
 
@@ -82,7 +81,7 @@ var suzanne;
 			startCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			startCamera.position.set(0,50,1);
 			startCamera.lookAt(0,0,0);
-
+			gameState.scene = 'open';
 		}
 
 
@@ -101,7 +100,7 @@ var suzanne;
 
 		}
 
-			renderer.render( startScene, startCamera );
+
 
 
 	function createMainScene(){
@@ -152,12 +151,6 @@ var suzanne;
 	function randN(n){
 		return Math.random()*n;
 	}
-
-
-
-
-
-
 
 
 	function playGameMusic(){
@@ -518,6 +511,10 @@ for(k = 0; k <1; k++){
 		requestAnimationFrame( animate );
 
 		switch(gameState.scene) {
+
+			
+			renderer.render( startScene, startCamera );
+			break;
 
 			case "youwon":
 				endText.rotateY(0.005);
