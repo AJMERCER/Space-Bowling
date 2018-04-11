@@ -1,10 +1,6 @@
 
 /*
-Game 0
-This is a ThreeJS program which implements a simple game
-The user moves a cube around the board trying to knock balls into a cone
 
-*/
 
 
 	// First we declare the variables that hold the objects we need
