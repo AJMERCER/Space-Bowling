@@ -13,7 +13,7 @@ The user moves a cube around the board trying to knock balls into a cone
 	var camera, avatarCam, edgeCam;  // we have two cameras in the main scene
 	var avatar;
 	// here are some mesh objects ...
-
+	var andrewsucks;
 var suzanne;
 	var endScene, endCamera, endText;
 
