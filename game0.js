@@ -17,8 +17,11 @@ var suzanne;
 	var endScene, endCamera, endText;
 	var startScene, startCamera, startText;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
+=======
+>>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
 
 
 >>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
@@ -68,7 +71,11 @@ var suzanne;
 			initSuzanne();
 			initSuzanneOBJ();
 <<<<<<< HEAD
+<<<<<<< HEAD
 			createStartScene()
+=======
+
+>>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
 =======
 
 >>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
@@ -102,6 +109,39 @@ var suzanne;
 			return mesh
 
 		}
+
+
+	function createStartScene(){
+			startScene = initScene();
+			startText = createStart('bowling.png',10);
+			startScene.add(startText);
+			var light1 = createPointLight();
+			light1.position.set(0,200,20);
+			startScene.add(light1);
+			startCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			startCamera.position.set(0,50,1);
+			startCamera.lookAt(0,0,0);
+			gameState.scene = 'open';
+		}
+
+
+
+		function createStart(image,k){
+			// creating a textured plane which receives shadows
+			var geometry = new THREE.PlaneGeometry( 100, 100, 100 );
+			var texture = new THREE.TextureLoader().load( '../images/'+image );
+			var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
+			var mesh = new THREE.Mesh( geometry, material, 0 );
+
+			mesh.receiveShadow = false;
+			mesh.rotateX(Math.PI/2);
+
+			return mesh
+
+		}
+
+
+
 
 
 	function createStartScene(){
