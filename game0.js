@@ -319,7 +319,7 @@
 
 	function createSkyBox(image,k){
 		// creating a textured plane which receives shadows
-		var geometry = new THREE.SphereGeometry( 80, 80, 80 );
+		var geometry = new THREE.SphereGeometry( 120, 120, 120 );
 		var texture = new THREE.TextureLoader().load( '../images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
