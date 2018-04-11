@@ -530,4 +530,7 @@ for(k = 0; k <1; k++){
 
 		}
 
+		var info = document.getElementById("info");
+		info.innerHTML='<div style="font-size:24pt">      Press P to play!!!! '+ '</div>';
+
 	}
