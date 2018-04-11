@@ -534,8 +534,6 @@ for(k = 0; k <1; k++){
 
 		var info = document.getElementById("info");
 		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! //////////    R to reset the game '+ '</div>';
-		info.innerHTML='<div style="font-size:24pt">      Press p to play!!!! '+ '</div>';
-=======
-		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! '+ '</div>';
+
 
 	}
