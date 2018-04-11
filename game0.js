@@ -298,7 +298,7 @@
 
 	function createGround(image){
 		// creating a textured plane which receives shadows
-		var geometry = new THREE.PlaneGeometry( 30, 300, 1 );
+		var geometry = new THREE.PlaneGeometry( 30, 155, 1 );
 		var texture = new THREE.TextureLoader().load( '../images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
