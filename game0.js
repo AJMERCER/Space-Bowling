@@ -13,13 +13,15 @@ The user moves a cube around the board trying to knock balls into a cone
 	var camera, avatarCam, edgeCam;  // we have two cameras in the main scene
 	var avatar;
 	// here are some mesh objects ...
-	var andrewsucks;
 var suzanne;
 	var endScene, endCamera, endText;
+	var startScene, startCamera, startText;
+<<<<<<< HEAD
+=======
 
 
 
-
+>>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
 
 
 	var controls =
@@ -50,13 +52,14 @@ var suzanne;
 		endCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
 		endCamera.position.set(0,50,1);
 		endCamera.lookAt(0,0,0);
-
 	}
+
 
 	/**
 	  To initialize the scene, we initialize each of its components
 	*/
 	function init(){
+			createStartScene();
       initPhysijs();
 			scene = initScene();
 			createEndScene();
@@ -64,7 +67,72 @@ var suzanne;
 			createMainScene();
 			initSuzanne();
 			initSuzanneOBJ();
+<<<<<<< HEAD
+			createStartScene()
+=======
+
+>>>>>>> 11c277d14881e373e1effdc49fc73c0389c456fe
 	}
+
+	function createStartScene(){
+			startScene = initScene();
+			startText = createStart('bowling.png',10);
+			startScene.add(startText);
+			var light1 = createPointLight();
+			light1.position.set(0,200,20);
+			startScene.add(light1);
+			startCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			startCamera.position.set(0,50,1);
+			startCamera.lookAt(0,0,0);
+
+		}
+
+
+
+		function createStart(image,k){
+			// creating a textured plane which receives shadows
+			var geometry = new THREE.PlaneGeometry( 100, 100, 100 );
+			var texture = new THREE.TextureLoader().load( '../images/'+image );
+			var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
+			var mesh = new THREE.Mesh( geometry, material, 0 );
+
+			mesh.receiveShadow = false;
+			mesh.rotateX(Math.PI/2);
+
+			return mesh
+
+		}
+
+
+	function createStartScene(){
+			startScene = initScene();
+			startText = createStart('bowling.png',10);
+			startScene.add(startText);
+			var light1 = createPointLight();
+			light1.position.set(0,200,20);
+			startScene.add(light1);
+			startCamera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			startCamera.position.set(0,50,1);
+			startCamera.lookAt(0,0,0);
+			gameState.scene = 'open';
+		}
+
+
+
+		function createStart(image,k){
+			// creating a textured plane which receives shadows
+			var geometry = new THREE.PlaneGeometry( 100, 100, 100 );
+			var texture = new THREE.TextureLoader().load( '../images/'+image );
+			var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
+			var mesh = new THREE.Mesh( geometry, material, 0 );
+
+			mesh.receiveShadow = false;
+			mesh.rotateX(Math.PI/2);
+
+			return mesh
+
+		}
+
 
 
 
@@ -116,12 +184,6 @@ var suzanne;
 	function randN(n){
 		return Math.random()*n;
 	}
-
-
-
-
-
-
 
 
 	function playGameMusic(){
@@ -183,11 +245,13 @@ var suzanne;
 		document.body.appendChild( renderer.domElement );
 		renderer.shadowMap.enabled = true;
 		renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+		renderer.render( startScene, startCamera );
 	}
+
 
 				function initSuzanne(){
 			var loader = new THREE.JSONLoader();
-			loader.load("../models/pin.JSON",
+			loader.load("../models/pin.obj",
 						function ( geometry, materials ) {
 							console.log("loading suzanne");
 							var material = //materials[ 0 ];
@@ -362,6 +426,16 @@ for (k = 0; k <3; k++){
 	ball.position.set((2*k + 2),3,42);
 	scene.add(ball);
 }
+for(k = 0; k <2; k++){
+	var ball = createBall();
+	ball.position.set((2*k + 3),3,38);
+	scene.add(ball);
+}
+for(k = 0; k <1; k++){
+	var ball = createBall();
+	ball.position.set((2*k + 4),3,34);
+	scene.add(ball);
+}
 	}
 
 
@@ -473,6 +547,10 @@ for (k = 0; k <3; k++){
 
 		switch(gameState.scene) {
 
+			
+			renderer.render( startScene, startCamera );
+			break;
+
 			case "youwon":
 				endText.rotateY(0.005);
 				renderer.render( endScene, endCamera );
@@ -491,9 +569,5 @@ for (k = 0; k <3; k++){
 			  console.log("don't know the scene "+gameState.scene);
 
 		}
-
-		//draw heads up display ..
-	  var info = document.getElementById("info");
-		info.innerHTML='<div style="font-size:24pt">Score: ' + gameState.score + '</div>';
 
 	}
