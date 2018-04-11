@@ -68,6 +68,7 @@
 	function createStartScene(){
 			startScene = initScene();
 			startText = createStart('bowling.png',10);
+
 			startScene.add(startText);
 			var light1 = createPointLight();
 			light1.position.set(0,200,20);
@@ -372,27 +373,26 @@
 
 	for(i=0;i<5;i++){
 		var ball = createBall();
-		ball.position.set(-4+(2*i),3,50);
+		ball.position.set(2*i,3,50);
 		scene.add(ball);
 }
 for (j=0;j<4;j++){
 	var ball = createBall();
-	ball.position.set(-4+(2*j + 1),3,46);
+	ball.position.set((2*j + 1),3,46);
 	scene.add(ball);
 }
 for (k = 0; k <3; k++){
 	var ball = createBall();
-	ball.position.set(-4+(2*k + 2),3,42);
 	scene.add(ball);
 }
 for(k = 0; k <2; k++){
 	var ball = createBall();
-	ball.position.set(-4+(2*k + 3),3,38);
+	ball.position.set((2*k + 3),3,38);
 	scene.add(ball);
 }
 for(k = 0; k <1; k++){
 	var ball = createBall();
-	ball.position.set(-4+(2*k + 4),3,34);
+	ball.position.set((2*k + 4),3,34);
 	scene.add(ball);
 }
 	}
@@ -456,12 +456,12 @@ for(k = 0; k <1; k++){
 			case "s": controls.bwd   = false; break;
 			case "a": controls.left  = false; break;
 			case "d": controls.right = false; break;
-			case "r": controls.up    = false; break;
 			case "f": controls.down  = false; break;
 			case "m": controls.speed = 10; break;
       case " ": controls.fly = false; break;
       case "h": controls.reset = false; break;
 			case "p": gameState.scene = 'main';
+			case "r": gameState.scene = 'open';
 		}
 	}
 
