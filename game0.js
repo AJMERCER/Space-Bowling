@@ -532,6 +532,10 @@ for(k = 0; k <1; k++){
 		}
 
 		var info = document.getElementById("info");
+<<<<<<< HEAD
 		info.innerHTML='<div style="font-size:24pt">      Press p to play!!!! '+ '</div>';
+=======
+		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! '+ '</div>';
+>>>>>>> 76e258b0962cc6fc603f30683173b508e0bf63c6
 
 	}
