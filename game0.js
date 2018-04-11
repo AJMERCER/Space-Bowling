@@ -383,6 +383,7 @@ for (j=0;j<4;j++){
 }
 for (k = 0; k <3; k++){
 	var ball = createBall();
+	ball.position.set((2*k + 2),3,42);
 	scene.add(ball);
 }
 for(k = 0; k <2; k++){
