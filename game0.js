@@ -426,16 +426,9 @@ for(k = 0; k <1; k++){
 		switch (event.key){
 			// change the way the avatar is moving
 			case "w": controls.fwd = true;  break;
-			case "s": controls.bwd = true; break;
 			case "a": controls.left = true; break;
 			case "d": controls.right = true; break;
-			case "r": controls.up = true; break;
-			case "f": controls.down = true; break;
 			case "m": controls.speed = 30; break;
-      case " ": controls.fly = true;
-          console.log("space!!");
-          break;
-      case "h": controls.reset = true; break;
 
 
 			// switch cameras
@@ -454,16 +447,11 @@ for(k = 0; k <1; k++){
 		//console.dir(event);
 		switch (event.key){
 			case "w": controls.fwd   = false;  break;
-			case "s": controls.bwd   = false; break;
 			case "a": controls.left  = false; break;
 			case "d": controls.right = false; break;
-			case "f": controls.down  = false; break;
 			case "m": controls.speed = 10; break;
-      case " ": controls.fly = false; break;
-      case "h": controls.reset = false; break;
 			case "p": gameState.scene = 'main'; break;
-			case "p": gameState.scene = 'main';break;
-			case "r": gameState.scene = 'open'; break;
+			case "r": createMainScene(); break;
 		}
 	}
 
