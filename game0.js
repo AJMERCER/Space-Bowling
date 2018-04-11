@@ -119,6 +119,9 @@
 			scene.add(ground);
 			var skybox = createSkyBox('space.jpg',1);
 			scene.add(skybox);
+			//var target = createTargetZone('black.png');
+			//target.se
+			//scene.add(target);
 
 			// create the avatar
 			avatarCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -307,14 +310,33 @@
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.05);
 		//var mesh = new THREE.Mesh( geometry, material );
 		var mesh = new Physijs.BoxMesh( geometry, pmaterial, 0 );
-
 		mesh.receiveShadow = true;
 
 		mesh.rotateX(Math.PI/2);
+
 		return mesh
+
+
 		// we need to rotate the mesh 90 degrees to make it horizontal not vertical
 	}
 
+	// function createTargetZone(image){
+	// 	var geometry = new THREE.PlaneGeometry( 300, 300, 1 );
+	// 	var texture = new THREE.TextureLoader().load( '../images/'+image );
+	// 	texture.wrapS = THREE.RepeatWrapping;
+	// 	texture.wrapT = THREE.RepeatWrapping;
+	// 	texture.repeat.set( 15, 15 );
+	// 	var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
+	// 	var pmaterial = new Physijs.createMaterial(material,0.9,0.05);
+	// 	//var mesh = new THREE.Mesh( geometry, material );
+	// 	var mesh = new Physijs.BoxMesh( geometry, pmaterial, 0 );
+	// 	mesh.receiveShadow = true;
+	//
+	// 	mesh.rotateX(Math.PI/2);
+	//
+	// 	return mesh
+	//
+	// }
 
 
 	function createSkyBox(image,k){
@@ -325,15 +347,11 @@
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( k, k );
 		var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
-		//var pmaterial = new Physijs.createMaterial(material,0.9,0.5);
-		//var mesh = new THREE.Mesh( geometry, material );
 		var mesh = new THREE.Mesh( geometry, material, 0 );
 
 		mesh.receiveShadow = false;
-
-
 		return mesh
-		// we need to rotate the mesh 90 degrees to make it horizontal not vertical
+
 
 
 	}
@@ -521,7 +539,7 @@ for(k = 0; k <1; k++){
 		}
 
 		var info = document.getElementById("info");
-		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! //////////    R to reset the game '+ '</div>';
+		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! //////////    F5 to reset the game '+ '</div>';
 
 
 	}
