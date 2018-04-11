@@ -98,6 +98,7 @@
 
 
 
+
 	function createMainScene(){
       // setup lighting
 			var light1 = createPointLight();
@@ -111,7 +112,7 @@
 			camera.position.set(0,50,0);
 			camera.lookAt(0,0,0);
 
-			addBalls();
+			addPins();
 
 
 			// create the ground and the skybox
@@ -135,13 +136,6 @@
 
       edgeCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
       edgeCam.position.set(20,20,10);
-
-
-
-
-
-
-			//playGameMusic();
 
 	}
 
@@ -358,7 +352,7 @@
 
 	function createAvatar(){
 		//var geometry = new THREE.SphereGeometry( 4, 20, 20);
-		var geometry = new THREE.SphereGeometry( 2, 32, 32);
+		var geometry = new THREE.SphereGeometry( 2, 100, 100);
 		var material = new THREE.MeshLambertMaterial( { color: 0xffff00} );
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.5);
 		//var mesh = new THREE.Mesh( geometry, material );
@@ -387,7 +381,7 @@
 		mesh.castShadow = true;
 		return mesh;
 	}
-	function addBalls(){
+	function addPins(){
 
 	for(i=0;i<5;i++){
 		var ball = createBall();
