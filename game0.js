@@ -542,7 +542,6 @@ for(k = 0; k <1; k++){
 			case "m": controls.speed = 10; break;
       case " ": controls.fly = false; break;
       case "h": controls.reset = false; break;
-			case "p": gameState.scene = 'main';
 		}
 	}
 
@@ -588,7 +587,7 @@ for(k = 0; k <1; k++){
 
 		switch(gameState.scene) {
 
-			case "open":
+			
 			renderer.render( startScene, startCamera );
 			break;
 
