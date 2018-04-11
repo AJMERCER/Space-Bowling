@@ -461,8 +461,8 @@ for(k = 0; k <1; k++){
 			case "m": controls.speed = 10; break;
       case " ": controls.fly = false; break;
       case "h": controls.reset = false; break;
-			case "p": gameState.scene = 'main';
-			case "r": gameState.scene = 'open';
+			case "p": gameState.scene = 'main';break;
+			case "r": gameState.scene = 'open'; break;
 		}
 	}
 
@@ -532,6 +532,6 @@ for(k = 0; k <1; k++){
 		}
 
 		var info = document.getElementById("info");
-		info.innerHTML='<div style="font-size:24pt">      Press P to play!!!! '+ '</div>';
+		info.innerHTML='<div style="font-size:24pt">      Press p to play!!!! '+ '</div>';
 
 	}
