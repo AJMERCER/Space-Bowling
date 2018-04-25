@@ -520,16 +520,16 @@ for(k = 0; k <1; k++){
 			case "p": gameState.scene = 'main'; break;
 			case "r": for (k=0;k<4;k++){
 				if (k == 3){
-				pin4.position.set(-4+(2*k + 1),3,46);
+				pin4.position.set(-4+(2*k + 2),3,42);
 				}
 				if (k == 2){
-				pin3.position.set(-4+(2*k + 1),3,46);
+				pin3.position.set(-4+(2*k + 2),3,42);
 				}
 				if (k == 1){
-				pin2.position.set(-4+(2*k + 1),3,46);
+				pin2.position.set(-4+(2*k + 2),3,42);
 				}
 				if (k == 0){
-				pin1.position.set(-4+(2*k + 1),3,46);
+				pin1.position.set(-4+(2*k + 2),3,42);
 				}
 			}
 				for (k = 0; k <3; k++){
