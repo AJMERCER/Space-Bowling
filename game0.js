@@ -513,7 +513,7 @@ for(k = 0; k <1; k++){
 		//console.log("Keydown:"+event.key);
 		//console.dir(event);
 		switch (event.key){
-			case "w": controls.fwd   = false;  break;
+			case "w": controls.fwd   = true;  break;
 			case "a": controls.left  = false; break;
 			case "d": controls.right = false; break;
 			case "m": controls.speed = 10; break;
