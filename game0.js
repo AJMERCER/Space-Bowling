@@ -1,4 +1,4 @@
-
+//April 25th 2018 version
 
 
 
@@ -12,26 +12,18 @@
 	var endScene, endCamera, endText;
 	var startScene, startCamera, startText;
 
-
-
-
-
 	var controls =
 	     {fwd:false, bwd:false, left:false, right:false,
 				speed:30, fly:false, reset:false,
 		    camera:camera}
 
 	var gameState =
-	     {score:0, health:10, scene:'main', camera:'none' }
-
+	     {score:0, health:10, scene:'main', camera:'none'}
 
 	// Here is the main game control
   init(); //
 	initControls();
 	animate();  // start the animation loop!
-
-
-
 
 	function createEndScene(){
 		endScene = initScene();
@@ -45,26 +37,20 @@
 		endCamera.position.set(0,50,1);
 		endCamera.lookAt(0,0,0);
 	}
-
-
-	/**
+/*
 	  To initialize the scene, we initialize each of its components
 	*/
 	function init(){
 			createStartScene();
       initPhysijs();
 			scene = initScene();
-			createEndScene();
 			initRenderer();
 			createMainScene();
+			createEndScene();
 			initSuzanne();
 			initSuzanneOBJ();
 
 	}
-
-
-
-
 	function createStartScene(){
 			startScene = initScene();
 			startText = createStart('bowling.png',10);
@@ -116,6 +102,9 @@
 
 
 			// create the ground and the skybox
+			var catcher = createCatcher('wf.jpg');
+			catcher.position.set(0,-50,0);
+			scene.add(catcher);
 			var ground = createGround('wf.jpg');
 			scene.add(ground);
 			var skybox = createSkyBox('space.jpg',1);
@@ -127,6 +116,7 @@
 			// create the avatar
 			avatarCam = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 );
 			avatar = createAvatar();
+
 			avatar.translateY(5);
 			avatar.translateZ(-25);
 			avatarCam.translateY(-4);
@@ -139,11 +129,9 @@
 
 	}
 
-
 	function randN(n){
 		return Math.random()*n;
 	}
-
 
 	function playGameMusic(){
 		// create an AudioListener and add it to the camera
@@ -292,6 +280,28 @@
 	}
 
 
+	function createCatcher(image){
+		// creating a textured plane which receives shadows
+		var geometry = new THREE.PlaneGeometry( 300, 2550, 1 );
+		var texture = new THREE.TextureLoader().load( '../images/'+image );
+		texture.wrapS = THREE.RepeatWrapping;
+		texture.wrapT = THREE.RepeatWrapping;
+		texture.repeat.set( 15, 15 );
+		var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
+		var pmaterial = new Physijs.createMaterial(material,0.9,0.05);
+		//var mesh = new THREE.Mesh( geometry, material );
+		var mesh = new Physijs.BoxMesh( geometry, pmaterial, 0 );
+		mesh.receiveShadow = true;
+
+
+
+		mesh.rotateX(Math.PI/2);
+		return mesh
+
+
+		// we need to rotate the mesh 90 degrees to make it horizontal not vertical
+	}
+
 
 	function createGround(image){
 		// creating a textured plane which receives shadows
@@ -342,7 +352,6 @@
 		texture.repeat.set( k, k );
 		var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
 		var mesh = new THREE.Mesh( geometry, material, 0 );
-
 		mesh.receiveShadow = false;
 		return mesh
 
@@ -381,6 +390,7 @@
 		mesh.castShadow = true;
 		return mesh;
 	}
+
 	function addPins(){
 
 	for(i=0;i<5;i++){
@@ -409,7 +419,22 @@ for(k = 0; k <1; k++){
 	scene.add(ball);
 }
 	}
-
+	ball.addEventListener( 'collision',
+		function( other_object, relative_velocity, relative_rotation, contact_normal ) {
+			if (other_object==catcher){
+				soundEffect('good.wav');
+				gameState.score += 1;  // add one to the score
+				if (gameState.score==numBalls) {
+					gameState.scene='youwon';
+				}
+				//scene.remove(ball);  // this isn't working ...
+				// make the ball drop below the scene ..
+				// threejs doesn't let us remove it from the schene...
+				this.position.y = this.position.y - 100;
+				this.__dirtyPosition = true;
+			}
+			}
+		)
 
 	var clock;
 
