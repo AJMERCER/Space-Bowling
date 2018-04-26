@@ -375,6 +375,14 @@
 
 		return mesh;
 	}
+	function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 
 
@@ -382,8 +390,9 @@
 
 	function createBall(){
 		//var geometry = new THREE.SphereGeometry( 4, 20, 20);
+
 		var geometry = new THREE.SphereGeometry( 1, 32, 3);
-		var material = new THREE.MeshLambertMaterial( { color: 0xffffff} );
+		var material = new THREE.MeshLambertMaterial( { color: getRandomColor()} );
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.95);
     var mesh = new Physijs.BoxMesh( geometry, pmaterial );
 		mesh.setDamping(0.1,0.1);
@@ -399,6 +408,7 @@
 for (k=0;k<4;k++){
 	if (k == 3){
 		var pin4= createBall();
+
 		pin4.position.set(-4+(2*k + 1),3,46);
 		scene.add(pin4);
 	}
