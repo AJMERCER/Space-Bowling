@@ -19,7 +19,8 @@
 		    camera:camera}
 
 	var gameState =
-	     {score:0, health:10, scene:'main', camera:'none'}
+	     {score:0, scene:'main', camera:'none'}
+	var x = 1;
 
 	// Here is the main game control
   init(); //
@@ -41,12 +42,15 @@
 /*
 	  To initialize the scene, we initialize each of its components
 	*/
+
 	function init(){
 			createStartScene();
+			playMenuMusic(x);
       initPhysijs();
 			scene = initScene();
 			initRenderer();
 			createMainScene();
+			playGameMusic();
 			createEndScene();
 			initSuzanne();
 			initSuzanneOBJ();
@@ -54,8 +58,7 @@
 	}
 	function createStartScene(){
 			startScene = initScene();
-			startText = createStart('bowling.png',10);
-
+			startText = createStart('bowling_start.jpg',10);
 			startScene.add(startText);
 			var light1 = createPointLight();
 			light1.position.set(0,200,20);
@@ -66,18 +69,52 @@
 			gameState.scene = 'open';
 		}
 
+		function playMenuMusic(playMusic){
+			var listener = new THREE.AudioListener();
+			startCamera.add( listener );
+
+			// create a global audio source
+			var sound = new THREE.Audio( listener );
+
+			// load a sound and set it as the Audio object's buffer
+			var audioLoader = new THREE.AudioLoader();
+			if(!playMusic){
+			// create an AudioListener and add it to the camera
+
+			audioLoader.load( 'sounds/menu_music.mp3', function( buffer ) {
+				sound.setBuffer( buffer );
+				sound.setLoop( true );
+				sound.setVolume( 2 );
+				sound.play();
+
+			}
+				)
+			}
+
+		else {
+
+			//sound.stop();
+
+			}
+
+		;
+	}
+
 
 
 		function createStart(image,k){
 			// creating a textured plane which receives shadows
-			var geometry = new THREE.PlaneGeometry( 100, 100, 100 );
-			var texture = new THREE.TextureLoader().load( '../images/'+image );
+			var geometry = new THREE.PlaneGeometry( 150, 100, 100 );
+			var texture = new THREE.TextureLoader().load( 'images/'+image );
 			var material = new THREE.MeshLambertMaterial( { color: 0xffffff,  map: texture ,side:THREE.DoubleSide} );
 			var mesh = new THREE.Mesh( geometry, material, 0 );
 
+
+
 			mesh.receiveShadow = false;
 			mesh.rotateX(Math.PI/2);
-
+			mesh.rotateY(Math.PI);
+			mesh.rotateZ(Math.PI);
 			return mesh
 
 		}
@@ -104,7 +141,7 @@
 
 			// create the ground and the skybox
 			var catcher = createCatcher('wf.jpg');
-			catcher.position.set(0,-50,0);
+			catcher.position.set(0,-10,0);
 			scene.add(catcher);
 			var ground = createGround('wf.jpg');
 			scene.add(ground);
@@ -144,10 +181,10 @@
 
 		// load a sound and set it as the Audio object's buffer
 		var audioLoader = new THREE.AudioLoader();
-		audioLoader.load( '/sounds/loop.mp3', function( buffer ) {
+		audioLoader.load( 'sounds/menu_music.mp3', function( buffer ) {
 			sound.setBuffer( buffer );
 			sound.setLoop( true );
-			sound.setVolume( 0.05 );
+			sound.setVolume( 2 );
 			sound.play();
 		});
 	}
@@ -175,6 +212,7 @@
 	function initScene(){
 		//scene = new THREE.Scene();
     var scene = new Physijs.Scene();
+		scene.setGravity(new THREE.Vector3( 0, -25, 0));
 		return scene;
 	}
 
@@ -197,7 +235,7 @@
 
 				function initSuzanne(){
 			var loader = new THREE.JSONLoader();
-			loader.load("../models/pin.obj",
+			loader.load("models/pin.obj",
 						function ( geometry, materials ) {
 							console.log("loading suzanne");
 							var material = //materials[ 0 ];
@@ -284,7 +322,7 @@
 	function createCatcher(image){
 		// creating a textured plane which receives shadows
 		var geometry = new THREE.PlaneGeometry( 300, 2550, 1 );
-		var texture = new THREE.TextureLoader().load( '../images/'+image );
+		var texture = new THREE.TextureLoader().load( 'images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 15, 15 );
@@ -307,7 +345,7 @@
 	function createGround(image){
 		// creating a textured plane which receives shadows
 		var geometry = new THREE.PlaneGeometry( 30, 155, 1 );
-		var texture = new THREE.TextureLoader().load( '../images/'+image );
+		var texture = new THREE.TextureLoader().load( 'images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( 15, 15 );
@@ -347,7 +385,7 @@
 	function createSkyBox(image,k){
 		// creating a textured plane which receives shadows
 		var geometry = new THREE.SphereGeometry( 120, 120, 120 );
-		var texture = new THREE.TextureLoader().load( '../images/'+image );
+		var texture = new THREE.TextureLoader().load( 'images/'+image );
 		texture.wrapS = THREE.RepeatWrapping;
 		texture.wrapT = THREE.RepeatWrapping;
 		texture.repeat.set( k, k );
@@ -401,10 +439,9 @@
 		return mesh;
 	}
 
+
+
 	function addPins(){
-
-
-
 //fourth level pins
 for (k=0;k<4;k++){
 	if (k == 3){
@@ -467,12 +504,12 @@ for(k = 0; k <1; k++){
 	scene.add(pin10);
 }
 	}
-	ball.addEventListener( 'collision',
+	pin10.addEventListener( 'collision',
 		function( other_object, relative_velocity, relative_rotation, contact_normal ) {
-			if (other_object==catcher){
-				soundEffect('good.wav');
+			if ((pin1==catcher) ||  (pin2==catcher) || (pin3==catcher) || (pin4==catcher) || (pin5==catcher) || (pin6==catcher) ||
+			 (pin7==catcher) || (pin8==catcher) || (pin9==catcher) || (pin10==catcher)) {
 				gameState.score += 1;
-				console.log(gameStae.score); // add one to the score
+				console.log('hit bottom'); // add one to the score
 			}
 			}
 		)
@@ -528,7 +565,9 @@ for(k = 0; k <1; k++){
 			case "a": controls.left  = false; break;
 			case "d": controls.right = false; break;
 			case "m": controls.speed = 10; break;
-			case "p": gameState.scene = 'main'; break;
+			case "p": gameState.scene = 'main';
+			 					x = 0;
+								break;
 		 	case "r":case "r":  while(scene.children.length > 0){
 								scene.remove(scene.children[0]);
 								controls.fwd = false;
@@ -602,7 +641,10 @@ for(k = 0; k <1; k++){
 		}
 
 		var info = document.getElementById("info");
-		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!!  Press   R to reset the game '+ '</div>';
-
+		info.innerHTML='<div style="font-size:24pt">    Score: ' +gameState.score + '  Press   R to reset the game '+ '</div>';
+		// info.innerHTML='<div style="font-size:24pt">Score: '
+		// + gameState.score
+		// + " health="+gameState.health
+		// + '</div>';
 
 	}
