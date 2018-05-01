@@ -376,6 +376,14 @@
 
 		return mesh;
 	}
+	function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 
 
@@ -383,8 +391,9 @@
 
 	function createBall(){
 		//var geometry = new THREE.SphereGeometry( 4, 20, 20);
+
 		var geometry = new THREE.SphereGeometry( 1, 32, 3);
-		var material = new THREE.MeshLambertMaterial( { color: 0xffffff} );
+		var material = new THREE.MeshLambertMaterial( { color: getRandomColor()} );
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.95);
     var mesh = new Physijs.BoxMesh( geometry, pmaterial );
 		mesh.setDamping(0.1,0.1);
@@ -400,6 +409,7 @@
 for (k=0;k<4;k++){
 	if (k == 3){
 		var pin4= createBall();
+
 		pin4.position.set(-4+(2*k + 1),3,46);
 		scene.add(pin4);
 	}
@@ -519,57 +529,62 @@ for(k = 0; k <1; k++){
 			case "d": controls.right = false; break;
 			case "m": controls.speed = 10; break;
 			case "p": gameState.scene = 'main'; break;
-			case "r": for (k=0;k<4;k++){
-				if (k == 3){
-				pin4.position.set(-4+(2*k + 1),3,46);
-				}
-				if (k == 2){
-				pin3.position.set(-4+(2*k + 1),3,46);
-				}
-				if (k == 1){
-				pin2.position.set(-4+(2*k + 1),3,46);
-				}
-				if (k == 0){
-				pin1.position.set(-4+(2*k + 1),3,46);
-				}
-			}
-				for (k = 0; k <3; k++){
-					if (k == 2){
-
-					pin7.position.set(-4+(2*k + 2),3,42);
-
-				}
-				if (k == 1){
-
-					pin6.position.set(-4+(2*k + 2),3,42);
-
-				}
-				if (k == 0){
-
-					pin5.position.set(-4+(2*k + 2),3,42);
-
-				}
-				}
-				//seccond level pins
-				for(k = 0; k <2; k++){
-					if (k == 0){
-
-					pin8.position.set(-4+(2*k + 3),3,38);
-
-				}
-				if (k == 1){
-
-					pin9.position.set(-4+(2*k + 3),3,38);
-				}
-				}
-				//top pins
-				for(k = 0; k <1; k++){
-
-					pin10.position.set(-4+(2*k + 4),3,34);
-
-				}
-			 break;
+		 	case "r":case "r":  while(scene.children.length > 0){
+								scene.remove(scene.children[0]);
+								controls.fwd = false;
+							} createMainScene(); break ;
 		}
+		// for (k=0;k<4;k++){
+		// 		if (k == 3){
+		// 		pin4.position.set(-4+(2*k + 1),3,46);
+		// 		}
+		// 		if (k == 2){
+		// 		pin3.position.set(-4+(2*k + 1),3,46);
+		// 		}
+		// 		if (k == 1){
+		// 		pin2.position.set(-4+(2*k + 1),3,46);
+		// 		}
+		// 		if (k == 0){
+		// 		pin1.position.set(-4+(2*k + 1),3,46);
+		// 		}
+		// 	}
+		// 		for (k = 0; k <3; k++){
+		// 			if (k == 2){
+		//
+		// 			pin7.position.set(-4+(2*k + 2),3,42);
+		//
+		// 		}
+		// 		if (k == 1){
+		//
+		// 			pin6.position.set(-4+(2*k + 2),3,42);
+		//
+		// 		}
+		// 		if (k == 0){
+		//
+		// 			pin5.position.set(-4+(2*k + 2),3,42);
+		//
+		// 		}
+		// 		}
+		// 		//seccond level pins
+		// 		for(k = 0; k <2; k++){
+		// 			if (k == 0){
+		//
+		// 			pin8.position.set(-4+(2*k + 3),3,38);
+		//
+		// 		}
+		// 		if (k == 1){
+		//
+		// 			pin9.position.set(-4+(2*k + 3),3,38);
+		// 		}
+		// 		}
+		// 		//top pins
+		// 		for(k = 0; k <1; k++){
+		//
+		// 			pin10.position.set(-4+(2*k + 4),3,34);
+		//
+		// 		}
+		// 	 break;
+		// }
 	}
 
 
@@ -637,7 +652,7 @@ for(k = 0; k <1; k++){
 		}
 
 		var info = document.getElementById("info");
-		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!! //////////    F5 to reset the game '+ '</div>';
+		info.innerHTML='<div style="font-size:24pt">     Press P to play!!!!  Press   R to reset the game '+ '</div>';
 
 
 	}
