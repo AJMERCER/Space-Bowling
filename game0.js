@@ -11,6 +11,7 @@
 	var suzanne;
 	var endScene, endCamera, endText;
 	var startScene, startCamera, startText;
+	var pin1,pin2,pin3,pin4,pin5,pin6,pin7,pin8,pin9,pin10;
 
 	var controls =
 	     {fwd:false, bwd:false, left:false, right:false,
@@ -365,7 +366,7 @@
 		var material = new THREE.MeshLambertMaterial( { color: 0xffff00} );
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.5);
 		//var mesh = new THREE.Mesh( geometry, material );
-		var mesh = new Physijs.BoxMesh( geometry, pmaterial );
+		var mesh = new Physijs.BoxMesh( geometry, pmaterial,0 );
 		mesh.setDamping(0.1,0.1);
 		mesh.castShadow = true;
 
