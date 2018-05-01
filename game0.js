@@ -366,7 +366,7 @@
 		var material = new THREE.MeshLambertMaterial( { color: 0xffff00} );
 		var pmaterial = new Physijs.createMaterial(material,0.9,0.5);
 		//var mesh = new THREE.Mesh( geometry, material );
-		var mesh = new Physijs.BoxMesh( geometry, pmaterial,0 );
+		var mesh = new Physijs.BoxMesh( geometry, pmaterial);
 		mesh.setDamping(0.1,0.1);
 		mesh.castShadow = true;
 
@@ -534,57 +534,7 @@ for(k = 0; k <1; k++){
 								controls.fwd = false;
 							} createMainScene(); break ;
 		}
-		// for (k=0;k<4;k++){
-		// 		if (k == 3){
-		// 		pin4.position.set(-4+(2*k + 1),3,46);
-		// 		}
-		// 		if (k == 2){
-		// 		pin3.position.set(-4+(2*k + 1),3,46);
-		// 		}
-		// 		if (k == 1){
-		// 		pin2.position.set(-4+(2*k + 1),3,46);
-		// 		}
-		// 		if (k == 0){
-		// 		pin1.position.set(-4+(2*k + 1),3,46);
-		// 		}
-		// 	}
-		// 		for (k = 0; k <3; k++){
-		// 			if (k == 2){
-		//
-		// 			pin7.position.set(-4+(2*k + 2),3,42);
-		//
-		// 		}
-		// 		if (k == 1){
-		//
-		// 			pin6.position.set(-4+(2*k + 2),3,42);
-		//
-		// 		}
-		// 		if (k == 0){
-		//
-		// 			pin5.position.set(-4+(2*k + 2),3,42);
-		//
-		// 		}
-		// 		}
-		// 		//seccond level pins
-		// 		for(k = 0; k <2; k++){
-		// 			if (k == 0){
-		//
-		// 			pin8.position.set(-4+(2*k + 3),3,38);
-		//
-		// 		}
-		// 		if (k == 1){
-		//
-		// 			pin9.position.set(-4+(2*k + 3),3,38);
-		// 		}
-		// 		}
-		// 		//top pins
-		// 		for(k = 0; k <1; k++){
-		//
-		// 			pin10.position.set(-4+(2*k + 4),3,34);
-		//
-		// 		}
-		// 	 break;
-		// }
+
 	}
 
 
